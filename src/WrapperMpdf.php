@@ -213,10 +213,12 @@ class WrapperMpdf extends Control implements ITemplatePath
     /**
      * Render.
      *
+     * @param bool $return
+     * @return \Nette\Application\UI\ITemplate
      * @throws \Mpdf\MpdfException
      * @throws \Nette\Application\AbortException
      */
-    public function render()
+    public function render(bool $return = false)
     {
         // main template
         $template = $this->getTemplate();
@@ -247,6 +249,11 @@ class WrapperMpdf extends Control implements ITemplatePath
 
         $this->mpdf->SetHTMLHeader($header);
         $this->mpdf->SetHTMLFooter($footer);
+
+        if ($return) {
+            // return for preview
+            return $template;
+        }
 
         $this->mpdf->WriteHTML($template);
         $this->mpdf->Output();
