@@ -1,0 +1,202 @@
+<style>
+    {*@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700&subset=latin-ext');*}
+    body {
+        font-family: Roboto, serif;
+    }
+
+    .title {
+        color: #000000;
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 34px;
+        text-transform: uppercase;
+        background: #fff;
+        padding: 0 0 0 45px;
+        white-space: nowrap;
+
+    }
+
+    .line {
+        width: 100%;
+        background: url('{$baseUrl|noescape}/www/images/line.png') repeat-x center;
+    }
+
+    .logo {
+        padding-right: 45px;
+        background: #fff;
+    }
+
+    .footer .logo {
+        padding-left: 45px;
+        padding-right: 0;
+    }
+
+    .footer table {
+        table-layout: auto;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .header table {
+        table-layout: auto;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .body table {
+        table-layout: auto;
+        width: 100%;
+        margin-top: 50px;
+        border-collapse: collapse;
+    }
+
+    .body table thead th {
+        color: #000000;
+        font-size: 14px;
+        line-height: 39px;
+        padding: 0 15px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+    }
+
+    .body table tbody tr {
+        border-style: solid;
+        border-bottom: 1px solid #dedede;
+    }
+
+    .body table tbody td {
+        color: #000000;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 39px;
+        white-space: nowrap;
+        padding: 0 15px;
+    }
+
+    .body table thead th:first-child {
+        padding-left: 0;
+    }
+
+    .body table thead th:last-child {
+        padding-right: 0;
+    }
+
+    .body table tbody td:first-child {
+        padding-left: 0;
+    }
+
+    .body table tbody td:last-child {
+        padding-right: 0;
+    }
+</style>
+{*<div class="header">
+    <table>
+        <tr>
+            <td class="logo"><img src="{$baseUrl|noescape}/www/images/logo.png"/></td>
+            <td class="line">
+
+            </td>
+            <td class="title">vybraní architekti</td>
+        </tr>
+    </table>
+</div>*}
+<div class="body">
+    {*<table style="overflow: hidden">*}
+    <table>
+        <thead>
+        <tr>
+            <th>jméno Architekta</th>
+            <th>email</th>
+            <th>telefon</th>
+            <th>Porotce</th>
+            <th>WWW</th>
+            <th>WWW</th>
+            <th>Typ autorizace</th>
+            <th>projekty</th>
+        </tr>
+        </thead>
+        <tbody>
+        {*<tr>
+            <td>Petra Opletalová</td>
+            <td>petra@opletalova.cz</td>
+            <td>+420 111 222 333</td>
+            <td>ano</td>
+            <td>www.petraoplarch.cz</td>
+            <td>A0, A1, A2, A3, A3.1</td>
+            <td>jiné</td>
+            <td>Impreta Garde, Can Limona, The Shard</td>
+        </tr>
+        <tr>
+            <td>Petra Opletalová</td>
+            <td>petra@opletalova.cz</td>
+            <td>+420 111 222 333</td>
+            <td>ano</td>
+            <td>www.petraoplarch.cz</td>
+            <td>A0, A1, A2, A3, A3.1</td>
+            <td>jiné</td>
+            <td>Impreta Garde, Can Limona, The Shard</td>
+        </tr>
+        <tr>
+            <td>Petra Opletalová</td>
+            <td>petra@opletalova.cz</td>
+            <td>+420 111 222 333</td>
+            <td>ano</td>
+            <td>www.petraoplarch.cz</td>
+            <td>A0, A1, A2, A3, A3.1</td>
+            <td>jiné</td>
+            <td>Impreta Garde, Can Limona, The Shard</td>
+        </tr>
+        <tr>
+            <td>Petra Opletalová</td>
+            <td>petra@opletalova.cz</td>
+            <td>+420 111 222 333</td>
+            <td>ano</td>
+            <td>www.petraoplarch.cz</td>
+            <td>A0, A1, A2, A3, A3.1</td>
+            <td>jiné</td>
+            <td>Impreta Garde, Can Limona, The Shard</td>
+        </tr>
+        <tr>
+            <td>Petra Opletalová</td>
+            <td>petra@opletalova.cz</td>
+            <td>+420 111 222 333</td>
+            <td>ano</td>
+            <td>www.petraoplarch.cz</td>
+            <td>A0, A1, A2, A3, A3.1</td>
+            <td>jiné</td>
+            <td>Impreta Garde, Can Limona, The Shard</td>
+        </tr>
+        <tr>
+            <td>Petra Opletalová</td>
+            <td>petra@opletalova.cz</td>
+            <td>+420 111 222 333</td>
+            <td>ano</td>
+            <td>www.petraoplarch.cz</td>
+            <td>A0, A1, A2, A3, A3.1</td>
+            <td>jiné</td>
+            <td>Impreta Garde, Can Limona, The Shard</td>
+        </tr>*}
+
+        <tr n:foreach="range(1,30) as $item">
+            <td>Petra Opletalová</td>
+            <td>petra@opletalova.cz</td>
+            <td>+420 111 222 333</td>
+            <td>ano</td>
+            <td>www.petraoplarch.cz</td>
+            <td>A0, A1, A2, A3, A3.1</td>
+            <td>jiné</td>
+            <td style="white-space: normal; line-height: 21px; width: 200px;">Impreta Garde, Can Limona{if $item==3}, The Shard, The Shard, The Shard, The Shard, The Shard, The Shard{/if}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{*<div class="footer">
+    <table>
+        <tr>
+            <td class="line"></td>
+            <td class="logo"><img src="{$baseUrl|noescape}/www/images/pdf-logo.png"/></td>
+        </tr>
+    </table>
+</div>*}
