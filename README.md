@@ -86,5 +86,8 @@ public function actionPdf()
 
     $wrapper->setTemplatePath(__DIR__ . '/templates/pdf.latte');
     $wrapper->render();
+    
+//    echo $wrapper->render(true);
+//    $this->terminate();
 }
 ```
