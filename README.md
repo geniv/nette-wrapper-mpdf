@@ -52,6 +52,8 @@ public function createComponentWrapperMpdf(WrapperMpdf $wrapperMpdf): WrapperMpd
     $wrapperMpdf->setTemplatePath(__DIR__ . '/templates/Project/pdf.latte');
     $wrapperMpdf->setTemplatePathHeader(__DIR__ . '/templates/pdfHeader.latte');
     $wrapperMpdf->setTemplatePathFooter(__DIR__ . '/templates/pdfFooter.latte');
+    $wrapperMpdf->setTemplatePathStyle(__DIR__ . '/templates/pdfStyle.latte');
+    
     $wrapperMpdf->setTitle('Titulek');
 //    $wrapperMpdf->setFormat('A4-L');
 //    $wrapperMpdf->setFormat('A4');
@@ -77,14 +79,16 @@ presenter usage:
 public function actionPdf()
 {
     $wrapper = $this['wrapperMpdf'];
+    $wrapper->setTemplatePath(__DIR__ . '/templates/pdf.latte');
 
 //    $wrapper->setFormat('A4-L');
     $wrapper->setFormat('A4');
 
+    $title = 'title of page';
     $wrapper->setTitle($title);
     $wrapper->addVariableTemplate('title', $title);
 
-    $wrapper->setTemplatePath(__DIR__ . '/templates/pdf.latte');
     $wrapper->render();
+//    $wrapper->render(true);   // preview
 }
 ```

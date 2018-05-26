@@ -24,7 +24,7 @@ class WrapperMpdf extends Control implements ITemplatePath
     /** @var ITranslator */
     private $translator;
     /** @var string */
-    private $templatePath, $templatePathHeader, $templatePathFooter;
+    private $templatePath, $templatePathHeader, $templatePathFooter, $templatePathStyle;
     /** @var array */
     private $variableTemplate = [];
     /** @var array */
@@ -88,6 +88,17 @@ class WrapperMpdf extends Control implements ITemplatePath
     public function setTemplatePathFooter(string $path)
     {
         $this->templatePathFooter = $path;
+    }
+
+
+    /**
+     * Set template path style.
+     *
+     * @param string $path
+     */
+    public function setTemplatePathStyle(string $path)
+    {
+        $this->templatePathStyle = $path;
     }
 
 
@@ -198,7 +209,7 @@ class WrapperMpdf extends Control implements ITemplatePath
             }
         }
 
-        // set title
+        // set pdf title
         if (isset($this->parameters['title'])) {
             $this->mpdf->SetTitle($this->parameters['title']);
         }
@@ -211,15 +222,80 @@ class WrapperMpdf extends Control implements ITemplatePath
 
 
     /**
+     * Make header template.
+     */
+    private function makeHeaderTemplate()
+    {
+        if ($this->templatePathHeader) {
+            $header = $this->createTemplate();
+            $header->addFilter(null, 'LatteFilters::common');
+            $header->setTranslator($this->translator);
+            $header->setFile($this->templatePathHeader);
+
+            // add user defined variable
+            foreach ($this->variableTemplate as $name => $value) {
+                $header->$name = $value;
+            }
+            $this->mpdf->SetHTMLHeader($header);
+        }
+    }
+
+
+    /**
+     * Make footer template.
+     */
+    private function makeFooterTemplate()
+    {
+        if ($this->templatePathFooter) {
+            $footer = $this->createTemplate();
+            $footer->addFilter(null, 'LatteFilters::common');
+            $footer->setTranslator($this->translator);
+            $footer->setFile($this->templatePathFooter);
+
+            // add user defined variable
+            foreach ($this->variableTemplate as $name => $value) {
+                $footer->$name = $value;
+            }
+            $this->mpdf->SetHTMLFooter($footer);
+        }
+    }
+
+
+    /**
+     * Get style template.
+     *
+     * @return string
+     */
+    private function getStyleTemplate(): string
+    {
+        $style = '';
+        if ($this->templatePathStyle) {
+            $style = $this->createTemplate();
+            $style->addFilter(null, 'LatteFilters::common');
+            $style->setTranslator($this->translator);
+            $style->setFile($this->templatePathStyle);
+
+            // add user defined variable
+            foreach ($this->variableTemplate as $name => $value) {
+                $style->$name = $value;
+            }
+        }
+        return (string) $style;
+    }
+
+
+    /**
      * Render.
      *
-     * @param bool $return
-     * @return \Nette\Application\UI\ITemplate
+     * @param bool $preview
+     * @return void
      * @throws \Mpdf\MpdfException
      * @throws \Nette\Application\AbortException
      */
-    public function render(bool $return = false)
+    public function render(bool $preview = false)
     {
+        $this->initMpdf();
+
         // main template
         $template = $this->getTemplate();
         $template->addFilter(null, 'LatteFilters::common');
@@ -227,37 +303,24 @@ class WrapperMpdf extends Control implements ITemplatePath
         $template->setFile($this->templatePath);
 
         // header
-        $header = $this->createTemplate();
-        $header->addFilter(null, 'LatteFilters::common');
-        $header->setTranslator($this->translator);
-        $header->setFile($this->templatePathHeader);
-
+        $this->makeHeaderTemplate();
         // footer
-        $footer = $this->createTemplate();
-        $footer->addFilter(null, 'LatteFilters::common');
-        $footer->setTranslator($this->translator);
-        $footer->setFile($this->templatePathFooter);
+        $this->makeFooterTemplate();
+        // style
+        $template->style = $this->getStyleTemplate();   // {$style|noescape}
 
         // add user defined variable
         foreach ($this->variableTemplate as $name => $value) {
             $template->$name = $value;
-            $header->$name = $value;
-            $footer->$name = $value;
         }
 
-        $this->initMpdf();
-
-        $this->mpdf->SetHTMLHeader($header);
-        $this->mpdf->SetHTMLFooter($footer);
-
-        if ($return) {
-            // return for preview
-            return $template;
+        if ($preview) {
+            // preview
+            $template->render();
+        } else {
+            $this->mpdf->WriteHTML($template);
+            $this->mpdf->Output();
         }
-
-        $this->mpdf->WriteHTML($template);
-        $this->mpdf->Output();
-
         $this->presenter->terminate();
     }
 }
