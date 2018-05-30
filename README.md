@@ -69,6 +69,8 @@ public function createComponentWrapperMpdf(WrapperMpdf $wrapperMpdf): WrapperMpd
     $wrapperMpdf->addConfig('autoMarginPadding', -9);
 
 //    $wrapperMpdf->setLogger($logger);
+//    $wrapperMpdf->setShowImageErrors(true);
+//    $wrapperMpdf->setDebug(true);
 
     return $wrapperMpdf;
 }

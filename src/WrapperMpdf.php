@@ -194,6 +194,28 @@ class WrapperMpdf extends Control implements ITemplatePath
 
 
     /**
+     * Set showImageErrors.
+     *
+     * @param bool $state
+     */
+    public function setShowImageErrors(bool $state)
+    {
+        $this->parameters['showImageErrors'] = $state;
+    }
+
+
+    /**
+     * Set debug.
+     *
+     * @param bool $state
+     */
+    public function setDebug(bool $state)
+    {
+        $this->parameters['debug'] = $state;
+    }
+
+
+    /**
      * Init mpdf.
      *
      * @throws \Mpdf\MpdfException
@@ -201,6 +223,16 @@ class WrapperMpdf extends Control implements ITemplatePath
     private function initMpdf()
     {
         $this->mpdf = new Mpdf($this->parameters['config']);
+
+        // set showImageErrors
+        if (isset($this->parameters['showImageErrors'])) {
+            $this->mpdf->showImageErrors = $this->parameters['showImageErrors'];
+        }
+
+        // set debug
+        if (isset($this->parameters['debug'])) {
+            $this->mpdf->debug = $this->parameters['debug'];
+        }
 
         // set font directory
         if (isset($this->parameters['FontDirectory']) && $this->parameters['FontDirectory']) {
