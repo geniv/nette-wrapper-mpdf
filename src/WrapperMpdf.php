@@ -194,6 +194,17 @@ class WrapperMpdf extends Control implements ITemplatePath
 
 
     /**
+     * Get mpdf.
+     *
+     * @return Mpdf
+     */
+    public function getMpdf(): Mpdf
+    {
+        return $this->mpdf;
+    }
+
+
+    /**
      * Init mpdf.
      *
      * @throws \Mpdf\MpdfException
