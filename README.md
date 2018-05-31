@@ -16,6 +16,10 @@ mpdf stackoverflow:
 - https://stackoverflow.com/questions/tagged/mpdf
 
 
+`setBacktrackLimit`:
+- https://mpdf.github.io/troubleshooting/known-issues.html
+- https://stackoverflow.com/questions/49116886/uncaught-mpdf-mpdfexception-the-html-code-size-is-larger-than-pcre-backtrack-li
+
 Installation
 ------------
 
@@ -71,6 +75,7 @@ public function createComponentWrapperMpdf(WrapperMpdf $wrapperMpdf): WrapperMpd
 //    $wrapperMpdf->setLogger($logger);
 //    $wrapperMpdf->setShowImageErrors(true);
 //    $wrapperMpdf->setDebug(true);
+//    $wrapperMpdf->setBacktrackLimit('5000000');
 
     return $wrapperMpdf;
 }
@@ -93,4 +98,17 @@ public function actionPdf()
     $wrapper->render();
 //    $wrapper->render(true);   // preview
 }
+```
+
+tips for latte:
+```latte
+{* use dataStream for convert do base64 if https is wrong configure *}
+{thumb projectDetail, $item['image']|dataStream}
+{dataStream}/www/images/pdf-logo.png{/dataStream}
+
+{* pager: *}
+{l}PAGENO{r}/{l}nbpg{r}
+
+{* style.latte: *}
+background: url('{dataStream}/www/images/line.png{/dataStream}') repeat-x center;
 ```
