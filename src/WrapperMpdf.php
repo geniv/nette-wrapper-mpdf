@@ -103,6 +103,17 @@ class WrapperMpdf extends Control implements ITemplatePath
 
 
     /**
+     * Set backtrack limit.
+     *
+     * @param string $limit
+     */
+    public function setBacktrackLimit(string $limit)
+    {
+        ini_set('pcre.backtrack_limit', $limit);
+    }
+
+
+    /**
      * Add variable template.
      *
      * @param string $name
