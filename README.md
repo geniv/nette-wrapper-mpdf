@@ -98,6 +98,8 @@ public function actionPdf()
 
     $wrapper->render();
 //    $wrapper->render(true);   // preview
+//    $wrapper->render(false, 'mpdf.pdf');  // save to file
+//    $pdf = $wrapper->render(false, null, \Mpdf\Output\Destination::STRING_RETURN);  // return to variable
 }
 ```
 
