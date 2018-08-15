@@ -36,6 +36,7 @@ require:
 "php": ">=7.0.0",
 "nette/nette": ">=2.4.0",
 "geniv/nette-general-form": ">=1.0.0",
+"geniv/nette-filters": ">=1.0.0",
 "mpdf/mpdf": ">=7.1.0"
 ```
 
