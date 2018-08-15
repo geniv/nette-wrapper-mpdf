@@ -36,6 +36,7 @@ require:
 "php": ">=7.0.0",
 "nette/nette": ">=2.4.0",
 "geniv/nette-general-form": ">=1.0.0",
+"geniv/nette-filters": ">=1.0.0",
 "mpdf/mpdf": ">=7.1.0"
 ```
 
@@ -97,6 +98,8 @@ public function actionPdf()
 
     $wrapper->render();
 //    $wrapper->render(true);   // preview
+//    $wrapper->render(false, 'mpdf.pdf');  // save to file
+//    $pdf = $wrapper->render(false, null, \Mpdf\Output\Destination::STRING_RETURN);  // return to variable
 }
 ```
 

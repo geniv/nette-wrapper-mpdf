@@ -330,12 +330,14 @@ class WrapperMpdf extends Control implements ITemplatePath
     /**
      * Render.
      *
-     * @param bool $preview
-     * @return void
+     * @param bool        $preview
+     * @param string|null $fileName
+     * @param string|null $destination
+     * @return string
      * @throws \Mpdf\MpdfException
      * @throws \Nette\Application\AbortException
      */
-    public function render(bool $preview = false)
+    public function render(bool $preview = false, string $fileName = null, string $destination = null)
     {
         $this->initMpdf();
 
@@ -362,7 +364,7 @@ class WrapperMpdf extends Control implements ITemplatePath
             $template->render();
         } else {
             $this->mpdf->WriteHTML($template);
-            $this->mpdf->Output();
+            return $this->mpdf->Output($fileName, $destination);
         }
         $this->presenter->terminate();
     }
