@@ -271,7 +271,6 @@ class WrapperMpdf extends Control implements ITemplatePath
     {
         if ($this->templatePathHeader) {
             $header = $this->createTemplate();
-            $header->addFilter(null, 'LatteFilters::common');
             $header->setTranslator($this->translator);
             $header->setFile($this->templatePathHeader);
 
@@ -291,7 +290,6 @@ class WrapperMpdf extends Control implements ITemplatePath
     {
         if ($this->templatePathFooter) {
             $footer = $this->createTemplate();
-            $footer->addFilter(null, 'LatteFilters::common');
             $footer->setTranslator($this->translator);
             $footer->setFile($this->templatePathFooter);
 
@@ -314,7 +312,6 @@ class WrapperMpdf extends Control implements ITemplatePath
         $style = '';
         if ($this->templatePathStyle) {
             $style = $this->createTemplate();
-            $style->addFilter(null, 'LatteFilters::common');
             $style->setTranslator($this->translator);
             $style->setFile($this->templatePathStyle);
 
@@ -343,7 +340,6 @@ class WrapperMpdf extends Control implements ITemplatePath
 
         // main template
         $template = $this->getTemplate();
-        $template->addFilter(null, 'LatteFilters::common');
         $template->setTranslator($this->translator);
         $template->setFile($this->templatePath);
 
