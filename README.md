@@ -28,15 +28,15 @@ $ composer require geniv/nette-wrapper-mpdf
 ```
 or
 ```json
-"geniv/nette-wrapper-mpdf": ">=1.0.0"
+"geniv/nette-wrapper-mpdf": "^1.0"
 ```
 
 require:
 ```json
-"php": ">=7.0.0",
-"nette/nette": ">=2.4.0",
-"geniv/nette-general-form": ">=1.0.0",
-"mpdf/mpdf": ">=7.1.0"
+"php": ">=7.0",
+"nette/nette": ">=2.4",
+"geniv/nette-general-form": ">=1.0",
+"mpdf/mpdf": ">=7.1"
 ```
 
 Include in application
@@ -99,6 +99,7 @@ public function actionPdf()
 //    $wrapper->render(true);   // preview
 //    $wrapper->render(false, 'mpdf.pdf');  // save to file
 //    $pdf = $wrapper->render(false, null, \Mpdf\Output\Destination::STRING_RETURN);  // return to variable
+    $this->terminate();
 }
 ```
 
