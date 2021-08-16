@@ -29,6 +29,8 @@ class WrapperMpdf extends Control implements ITemplatePath
     private $variableTemplate = [];
     /** @var array */
     private $parameters = [];
+    /**  @var bool */
+    private $compression = true;
 
 
     /**
@@ -227,6 +229,17 @@ class WrapperMpdf extends Control implements ITemplatePath
 
 
     /**
+     * Nastaveni komprese
+     *
+     * @param bool $state
+     */
+    public function setCompression(bool $state)
+    {
+        $this->compression = $state;
+    }
+
+
+    /**
      * Init mpdf.
      *
      * @throws \Mpdf\MpdfException
@@ -234,6 +247,7 @@ class WrapperMpdf extends Control implements ITemplatePath
     private function initMpdf()
     {
         $this->mpdf = new Mpdf($this->parameters['config']);
+        $this->mpdf->SetCompression($this->compression);
 
         // set showImageErrors
         if (isset($this->parameters['showImageErrors'])) {
